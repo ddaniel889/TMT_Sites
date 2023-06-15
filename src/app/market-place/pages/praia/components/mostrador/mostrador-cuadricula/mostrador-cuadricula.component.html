@@ -1,0 +1,54 @@
+<div class="col-lg-4 col-md-4 col-6"
+  *ngFor="let paquete of paquetes | paginate: { id: titulo.toLowerCase(), itemsPerPage: itemsPorPagina, currentPage: paginaActual, totalItems: paquetes.length }">
+
+  <a [routerLink]="[ruta, paquete.url]">
+
+    <div class="ps-product">
+
+      <div class="ps-product__thumbnail">
+
+        <img imagen [producto]="paquete" tipo="paquete">
+
+      </div>
+
+      <div class="ps-product__container">
+
+        <h3 class="h3-paquete-titulo">{{ paquete.nombre | uppercase}}</h3>
+
+        <p class="text-truncate">{{ paquete.sobre }}</p>
+
+        <p class="parcelas">em até <strong>{{ paquete.parcelas }}X</strong> a partir de</p>
+
+        <div class="row">
+
+          <div class="col-lg-6 col-md-6 col-6">
+
+            <p class="valor">R$ {{ paquete.precio / 12 | number: '1.2-2' }}</p>
+
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-6 text-md-right">
+
+            <p>
+
+              <small class="color-gris-80">À vista R$ {{ paquete.precio }}</small><br>
+
+              <small class="color-gris-80">preço por pessoa</small><br>
+
+              <small class="color-gris-40">* taxas à incluir</small>
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </a>
+
+</div>
+
+

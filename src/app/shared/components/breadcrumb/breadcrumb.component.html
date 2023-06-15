@@ -1,0 +1,25 @@
+<div class="ps-breadcrumb">
+
+  <div class="container">
+
+    <ul class="breadcrumb">
+
+      <li><a routerLink="/">Inicio</a></li>
+
+      <li *ngIf="breadcrumb.path">{{breadcrumb.path | titlecase }}</li>
+
+      <li *ngIf="breadcrumb.sitio1">{{breadcrumb.sitio1 | titlecase }}</li>
+
+      <li *ngIf="breadcrumb.sitio2">{{breadcrumb.sitio2 | titlecase }}</li>
+
+      <li *ngIf="breadcrumb.sitio3">{{breadcrumb.sitio3 | titlecase }}</li>
+
+      <li *ngIf="breadcrumb.sitio4">{{breadcrumb.sitio4 | titlecase }}</li>
+
+      <li *ngIf="breadcrumb.sitio5">{{breadcrumb.sitio5 | titlecase }}</li>
+
+    </ul>
+
+  </div>
+
+</div>

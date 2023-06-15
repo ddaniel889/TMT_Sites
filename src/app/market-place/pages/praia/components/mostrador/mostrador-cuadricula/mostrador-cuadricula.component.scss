@@ -1,0 +1,43 @@
+.ps-product {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.5);
+  padding: 0;
+
+  .ps-product__container {
+    padding: 20px 20px 0;
+    .h3-paquete-titulo {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+
+  .ps-product__thumbnail {
+    border-radius: 10px 10px 0 0;
+  } 
+
+  .parcelas {
+    font-size: 1.3rem;
+    line-height: .5rem;
+  }
+
+  .valor {
+    font-size: 2rem;
+    color: red;
+    line-height: 26px;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+  }
+}
+
+.ps-product:hover {
+  border-color: #009B3A;
+  box-shadow: 0px 2px 3px -1px rgba(0,155,58,1);
+  cursor: pointer;
+}
+
+
+
+
+
+

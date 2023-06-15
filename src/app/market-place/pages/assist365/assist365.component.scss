@@ -1,0 +1,168 @@
+.one{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.btn{
+   margin-top: 40px !important;
+}
+
+.desc_marg{
+    margin-left: 10px !important;
+ }
+
+.invalid-input {
+    border: 1px solid #E8446C  !important;
+   } 
+
+   .invalid-label {
+    color:  #E8446C  !important;
+   } 
+
+   .valid-input {
+    border: 1px solid #28a745  !important;
+   } 
+
+.results{
+    padding-top: 30px;
+ }
+
+.datos{
+    margin-top: 20px!important;
+    margin-bottom: 20px !important;
+}
+.title{
+    color: #09c;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.title2{
+    margin-top: 20px;
+
+}
+
+.margin_a{
+    margin-left: 17px;
+
+}
+
+
+
+.margin_b{
+    margin-left: 40px;
+
+}
+
+.heroes-menu {
+    padding: 0;
+    margin: auto;  
+    margin-left: 40px;
+    margin-right: 40px;
+    /* flexbox */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  h3.ps-form__heading.title2.coberturas, h5.ps-form__heading.title2.coberturas{
+    margin-left: 42% !important;
+ }
+
+  h5.ps-form__heading.title2.coberturas{
+    margin-left: 35% !important;
+ }
+
+ .no-policy{
+    margin-top: 50px !important;
+    margin-bottom: 200px !important;
+    color: #E8446C !important;
+
+ }
+ .ps{
+    margin-left: 5px !important;
+    color: black !important;
+    font-weight: bold;
+ }
+ .ico{
+    color: #E8446C !important;
+    margin-right: 15px;
+ }
+ .age-column{
+    margin-bottom: 15px;
+ }
+
+ .ico-age{
+    color: black !important;
+   // margin-left: 350px !important;
+   float:  right !important;
+ }
+
+
+
+ @media only screen  and (width: 479px) {
+    h3.ps-form__heading.title2.coberturas{
+        margin-left: 27% !important;
+     }
+  }
+
+ .prod-display:hover {
+   -ms-transform: scale(1.03); 
+    -webkit-transform: scale(1.03); 
+    transform: scale(1.03);
+    border: 1px solid #fcb800;
+  }
+
+.assist{
+    margin-top: 10px !important;
+    margin-bottom:10px !important;
+}
+
+.btn-add{
+    margin-right: 20px !important;
+
+}
+
+.edad{
+    color: white;
+}
+.btn-first{
+    margin-top: 20px !important;
+}
+
+.btn-bottom{
+    margin-top: 5px !important;
+   
+}
+.form-bottom{
+    margin-bottom:10px !important;
+}
+
+.prod{
+    margin-left: 20px !important;
+    margin-right:20px !important;
+}
+.ps-list--dot{
+    margin-right: 10px !important;
+}
+.checkout-border{
+    margin-top: 20px !important;
+}
+
+
+
+.margin-prod{
+    margin-top: 10px  !important;
+    margin-bottom: 10px !important;
+}
+
+.spa-margin{
+    margin-left: 5px !important;
+}

@@ -1,0 +1,137 @@
+<div class="ps-block--bought-toggether" *ngIf="productoCJ !== null">
+
+  <h4>Frecuentemente comprados juntos</h4>
+
+  <div class="ps-block__content">
+
+    <div class="ps-block__items">
+
+      <div class="ps-block__item">
+
+        <div class="ps-product ps-product--simple">
+
+          <div class="ps-product__thumbnail">
+
+            <img imagen [producto]="producto" tipo="paquete">
+
+          </div>
+
+          <div class="ps-product__container">
+
+            <div class="ps-product__content">
+
+              <h2>{{ producto.nombre }}</h2> 
+
+              <p class="ps-product__price" 
+                oferta 
+                [producto]="producto"
+                [precioOferta]="true"></p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="ps-block__item">
+
+        <div class="ps-product ps-product--simple">
+
+          <div class="ps-product__thumbnail">
+
+            <a [routerLink]="['/paquetes/nacionales', productoCJ.url]">
+
+              <img imagen [producto]="productoCJ" tipo="paquete">
+
+            </a>
+
+          </div>
+
+          <div class="ps-product__container">
+
+            <div class="ps-product__content">
+
+              <a class="ps-product__title" [routerLink]="['/paquetes/nacionales', productoCJ.url]">{{ productoCJ.nombre }}</a>
+
+              <p class="ps-product__price" 
+                oferta 
+                [producto]="productoCJ" 
+                [precioOferta]="true"></p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="ps-block__item ps-block__total">
+
+        <p>Total Price:<strong> ${{ precioCompradoJunto }}</strong></p>
+
+        <a class="ps-btn" href="#">Add All to cart</a>
+
+        <a class="ps-btn ps-btn--gray ps-btn--outline" href="#">Add All to whishlist</a>
+
+      </div>
+
+    </div>
+
+    <div class="ps-block__footer">
+
+      <div class="ps-checkbox">
+
+        <input 
+          class="form-control" 
+          type="checkbox" 
+          id="product-bought-1" 
+          name="product-bought" 
+          [checked]="checkedProducto" 
+          (change)="precioProducto($event.target.checked)">
+
+        <label for="product-bought-1">
+
+          <strong>This item: </strong> 
+
+          {{ producto.nombre }}
+
+          <span 
+            oferta 
+            [producto]="producto" 
+            [precioOferta]="true"></span>
+
+        </label>
+
+      </div>
+
+      <div class="ps-checkbox">
+
+        <input 
+          class="form-control" 
+          type="checkbox" 
+          id="product-bought-2" 
+          name="product-bought" 
+          [checked]="checkedProductoCJ" 
+          (change)="precioCJ($event.target.checked)">
+
+        <label for="product-bought-2">
+
+          {{ productoCJ.nombre }}
+
+          <span 
+            oferta 
+            [producto]="productoCJ" 
+            [precioOferta]="true"></span>
+
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

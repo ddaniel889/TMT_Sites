@@ -1,0 +1,208 @@
+<div class="ps-product--detail ps-product--fullwidth">
+
+  <div class="ps-product__header">
+
+    <shared-galeria class="ps-product__thumbnail" data-vertical="true" [producto]="producto"></shared-galeria>
+
+    <div class="ps-product__info">
+
+      <h1>{{ producto.nombre }}</h1>
+
+      <div class="ps-product__meta">
+
+        <!-- <p>Marca: <a [routerLink]="['/tienda/marca', producto.marca]">{{ producto.marca | titlecase }}</a></p> -->
+
+        <div class="ps-product__rating">
+
+          <select class="ps-rating" data-read-only="true" rating [producto]="producto"></select>
+
+          <span rating [producto]="producto" [revisiones]="true"></span>
+
+        </div>
+
+      </div>
+
+      <h4 class="ps-product__price sale" oferta [producto]="producto" [precioOferta]="true" [precioTachado]="true"
+        [porcentageConParentesis]="true"></h4>
+
+      <div class="ps-product__desc">
+
+        <p>
+
+          Sold By: <a class="mr-20" [routerLink]="['/tienda',producto.tienda.url]">
+            <strong> {{ producto.tienda.nombre }}</strong></a>
+
+          Status: <strong class="ps-tag--in-stock" stock [producto]="producto" [mostrarTexto]="true"></strong>
+
+        </p>
+
+        <ul class="ps-list--dot" [innerHTML]="producto.resumen"></ul>
+
+      </div>
+
+      <div class="ps-product__variations" [innerHTML]="producto.especificacion"></div>
+
+      <div class="ps-product__countdown" *ngIf="producto.oferta !== undefined">
+
+        <figure>
+
+          <figcaption> Don't Miss Out! This promotion will expires in</figcaption>
+
+          <ul class="ps-countdown" attr.data-time="{{ producto | temporizador }}">
+
+            <li><span class="days"></span>
+
+              <p>Days</p>
+
+            </li>
+
+            <li><span class="hours"></span>
+
+              <p>Hours</p>
+
+            </li>
+
+            <li><span class="minutes"></span>
+
+              <p>Minutes</p>
+
+            </li>
+
+            <li><span class="seconds"></span>
+
+              <p>Seconds</p>
+
+            </li>
+
+          </ul>
+
+        </figure>
+
+        <figure>
+
+          <figcaption>Sold Items</figcaption>
+
+          <div class="ps-product__progress-bar ps-progress" [attr.data-value]="producto.stock">
+
+            <div class="ps-progress__value"><span></span></div>
+
+            <p><b>{{100 - producto.stock}}/100</b> Sold</p>
+
+          </div>
+
+        </figure>
+
+      </div>
+
+      <div class="ps-product__shopping">
+
+        <figure>
+
+          <figcaption>Cantidad</figcaption>
+
+          <div class="form-group--number">
+
+            <button class="up" (click)="up()">
+
+              <i class="fa fa-plus"></i>
+
+            </button>
+
+            <button class="down" (click)="down()">
+
+              <i class="fa fa-minus"></i>
+
+            </button>
+
+            <input type="number" [value]="cantidad" min="1" max="9" class="form-control"
+              (keyup)="cantidadChange($event.target.value)">
+
+          </div>
+
+        </figure>
+
+        <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
+
+        <a class="ps-btn" href="#">Buy Now</a>
+
+        <div class="ps-product__actions">
+
+          <a href="#">
+
+            <i class="icon-heart"></i>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="ps-product__specification">
+
+        <a class="report" href="#">Report Abuse</a>
+
+        <p class="categories">
+
+          <strong> Categories:</strong>
+
+          <a [routerLink]="['/paquetes', producto.categoriaPaquete.url]">{{ producto.categoriaPaquete.nombre | lowercase }}</a>,
+
+        </p>
+
+        <p class="tags"><strong>Tags:</strong>
+
+          <a [routerLink]="['/paquetes/etiqueta', etiqueta.nombre]" *ngFor="let etiqueta of producto.etiquetas">
+            {{ etiqueta.nombre }}</a>
+
+        </p>
+
+      </div>
+
+      <div class="ps-product__sharing">
+
+        <a class="facebook" [href]="producto.tienda.social.facebook" target="_blank"
+          *ngIf="producto.tienda.social.facebook">
+
+          <i class="fa fa-facebook"></i>
+
+        </a>
+
+        <a class="twitter" [href]="producto.tienda.social.twitter" target="_blank"
+          *ngIf="producto.tienda.social.twitter">
+
+          <i class="fa fa-twitter"></i>
+
+        </a>
+
+        <a class="linkedin" [href]="producto.tienda.social.linkedin" target="_blank"
+          *ngIf="producto.tienda.social.linkedin">
+
+          <i class="fa fa-linkedin"></i>
+
+        </a>
+
+        <a class="instagram" [href]="producto.tienda.social.instagram" target="_blank"
+          *ngIf="producto.tienda.social.instagram">
+
+          <i class="fa fa-instagram"></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="ps-product__content ps-tab-root">
+
+    <nacionales-frecuentes [producto]="producto"></nacionales-frecuentes>
+
+    <nacionales-tabs-list [producto]="producto"></nacionales-tabs-list>
+
+    <nacionales-tabs [producto]="producto"></nacionales-tabs>
+
+  </div>
+
+</div>

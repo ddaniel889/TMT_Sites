@@ -1,0 +1,9 @@
+<div class="ps-breadcrumb">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><a routerLink="/tienda">Store</a></li>
+      <li *ngIf="breadcrumb.sitio">{{breadcrumb.path | titlecase }}</li>
+      <li *ngIf="breadcrumb.sitio">{{breadcrumb.sitio }}</li>
+    </ul>
+  </div>
+</div>

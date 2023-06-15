@@ -1,0 +1,21 @@
+<div class="media p-3" *ngIf="producto !== null">
+
+  <img 
+    imagen 
+    [producto]="producto" 
+    tipo="tienda"
+    class="mr-5 mt-1 rounded-circle">
+
+  <div class="media-body">
+
+    <h4>{{ producto.tienda.tienda }}</h4>
+    
+    <p>{{ producto.tienda.sobre }}</p>
+
+    <a 
+      [routerLink]="['/tienda', producto.tienda.url]"
+      class="ps-btn">Más Productos de {{ producto.tienda.tienda }}</a>
+
+  </div>
+
+</div>

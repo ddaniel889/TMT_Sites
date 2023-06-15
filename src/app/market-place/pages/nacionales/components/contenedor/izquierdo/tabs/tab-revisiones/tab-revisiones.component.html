@@ -1,0 +1,44 @@
+<div class="row">
+
+  <div class="col-lg-5 col-12 ">
+
+    <div class="ps-block--average-rating" bloqueDeEstrellas [producto]="producto">
+
+      <div class="ps-block__header">
+
+        <h3 rating [producto]="producto" [soloPromedio]="true" [decimales]="true"></h3>
+
+        <select class="ps-rating" data-read-only="true" rating [producto]="producto"></select>
+
+        <span rating [producto]="producto" [revisiones]="true"></span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 ">
+
+    <div class="media border p-3 mb-3" *ngFor="let revision of producto.revisiones; index as i">
+
+      <img imagen [producto]="producto" tipo="usuario" [index]="i" class="mr-5 mt-1 rounded-circle">
+
+      <div class="media-body">
+
+        <select class="ps-rating" data-read-only="true" rating [producto]="producto" [indexRevisiones]="i"></select>
+
+        <h4>
+          {{ revision.usuario !== undefined ? revision.usuario.nombre + ' ' + revision.usuario.apellido : 'Desconocidos' }}
+          <small><i>Posted on {{ revision.creado | date }} </i></small>
+        </h4>
+
+        <p>{{ revision.comentario }}</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

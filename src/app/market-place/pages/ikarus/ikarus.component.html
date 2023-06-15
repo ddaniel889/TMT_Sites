@@ -1,0 +1,348 @@
+<div class="ps-site-features one">
+<div class="container">   
+
+<div class="ps-section__content">
+
+       <!--Form búsqueda de Vuelos-->
+    <form class="ps-form--checkout" [formGroup]="ikarusForm" (ngSubmit)="postVuelos()">
+        <div class="ps-form__content">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-form__billing-info">
+                        <h3 class="ps-form__heading buscador">Flight search</h3>
+                        <h5><strong class="datos" *ngIf="multipl">Trayecto 1</strong></h5> 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Origin <i class="fa fa-plane ico"></i></label>
+                                    <select class="form-control" formControlName="aeroS" [ngClass]="{ 'valid-input': aeroS.valid, 'invalid-input': aeroS.invalid }">   
+                                    <option *ngFor="let city of iataCiudades" [ngValue]="city.iata"  >{{city.name}}</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="aeroS.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Destiny <i class="fa fa-fighter-jet ico"></i></label>
+                                    <select class="form-control" formControlName="aeroL" [ngClass]="{ 'valid-input': aeroL.valid, 'invalid-input': aeroL.invalid }">
+                                      <option *ngFor="let city of iataCiudades" [ngValue]="city.iata"  >{{city.name}}</option>  
+                                    </select>
+                                    <div class="invalid-label" *ngIf="aeroL.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Trips:<i class="fa fa-globe ico"></i></label>
+                                    <select (change)="selectTravel($event)" class="form-control" formControlName="tipo"  [ngClass]="{ 'valid-input': tipo.valid, 'invalid-input': tipo.invalid }">
+                                        <option value="ida">Solamente Ida</option>
+                                        <option value="idaVuelta">Ida y Vuelta</option>
+                                        <option value="multiple">Múltiples Destinos</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="tipo.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Program:<i class="fa fa-ticket ico"></i></label>
+                                    <select class="form-control" formControlName="programa"  [ngClass]="{ 'valid-input': programa.valid, 'invalid-input': programa.invalid }">
+                                        <option value="multiplus">Multiplus</option>
+                                        <option value="smiles">Smiles</option>
+                                        <option value="azul">Azul</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="programa.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Departure date:</label>
+                                    <input class="form-control" type="date" placeholder="" formControlName="fechaI" [ngClass]="{ 'is-valid': fechaI.valid, 'is-invalid': fechaI.invalid }">
+                                    <div class="invalid-feedback" *ngIf="fechaI.hasError('required')">Este campo é obrigatorio.</div>
+                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group" *ngIf="two">
+                                    <label>Arrival date:</label>
+                                    <input class="form-control" type="date" placeholder="" formControlName="fechaV" >
+                                </div>
+                            </div>
+                        </div>
+                       <div class="multi" *ngIf="multipl">  
+                        <h5><strong class="datos">Trayecto 2</strong></h5> 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Origin <i class="fa fa-plane ico"></i></label>
+                                    <select class="form-control" formControlName="aerosDos" [ngClass]="{ 'valid-input': aerosDos.valid, 'invalid-input': aerosDos.invalid }">
+                                        <option *ngFor="let city of iataCiudades" [ngValue]="city.iata">{{city.name}}</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="aerosDos.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Destiny <i class="fa fa-fighter-jet ico"></i></label>
+                                    <select class="form-control" formControlName="aerolDos" [ngClass]="{ 'valid-input': aerolDos.valid, 'invalid-input': aerolDos.invalid }">
+                                        <option *ngFor="let city of iataCiudades" [ngValue]="city.iata"  >{{city.name}}</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="aerolDos.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Departure date:</label>
+                                    <input class="form-control" type="date" placeholder="" formControlName="fechaDos" [ngClass]="{ 'is-valid': fechaDos.valid, 'is-invalid': fechaDos.invalid }">
+                                    <div class="invalid-feedback" *ngIf="fechaDos.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Program:<i class="fa fa-ticket ico"></i></label>
+                                    <select class="form-control" formControlName="programaDos"  [ngClass]="{ 'valid-input': programaDos.valid, 'invalid-input': programaDos.invalid }">
+                                        <option value="multiplus">Multiplus</option>
+                                        <option value="smiles">Smiles</option>
+                                        <option value="azul">Azul</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="programaDos.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Adults:</label>
+                                    <input class="form-control" type="number"  min="1" placeholder="" formControlName="adultos" [ngClass]="{ 'is-valid': adultos.valid, 'is-invalid': adultos.invalid }">
+                                    <div class="invalid-feedback" *ngIf="adultos.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Children:</label>
+                                    <input class="form-control" type="number" min="0" placeholder="" formControlName="ninos">
+                                    <small class="form-text text-muted invalid-label" *ngIf="ninos.hasError('ninoValidate')">
+                                        Introduza um endereço de E-mail válido.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cabin:<i class="fa fa-suitcase ico"></i></label>
+                                    <select class="form-control" formControlName="cabina" [ngClass]="{ 'valid-input': cabina.valid, 'invalid-input': cabina.invalid }">
+                                        <option value="E">Economic</option>
+                                        <option value="X">Business</option>
+                                    </select>
+                                    <div class="invalid-label" *ngIf="cabina.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Baby:</label>
+                                    <input class="form-control" type="number" min="0" placeholder="" formControlName="bebes">
+                                    <small class="form-text text-muted invalid-label" *ngIf="bebes.hasError('bebeValidate')">
+                                        Introduza um endereço de E-mail válido.
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+                        <button type="submit"   [disabled]="!loading && ikarusForm.invalid" class="ps-btn ps-btn--fullwidth" >{{ loading ? 'Sending' : 'Search' }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                <div class="ps-product__groupped flighto">
+                    <div class="table-responsive">
+                        <table class="table ps-table--product-groupped">
+                            <tbody>
+                                <tr>
+                                  <td><button type="submit" class="ps-btn repeat" (click)="volver()">Repeat search</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+               </div>
+        </div>
+    </div> 
+
+    <div class="loading text-center" *ngIf="buscar">Loading...</div>
+    <div class="error text-center consultar"  *ngIf="repetir"><i class="fa fa-exclamation-circle"></i><strong class="service"> Por favor pulsar a consultar nuevamente. </strong></div>
+    <div class="error text-center"  *ngIf="respError"><i class="fa fa-exclamation-circle"></i><strong class="service"> Servicio no disponible, intente nuevamente. </strong></div>
+    <div class="error no-vuelos"  *ngIf="noVuelos"><i class="fa fa-exclamation-circle"></i><strong> No hay vuelos disponibles para ésta fecha.</strong></div>
+    <div class="error text-left"  *ngIf="foutError"><i class="fa fa-exclamation-circle"></i><strong> No hay vuelos de ida disponibles para ésta fecha.</strong></div>
+    <div class="error text-left"  *ngIf="finbError"><strong><i class="fa fa-exclamation-circle"></i> No hay vuelos de regreso disponibles para ésta fecha.</strong></div>
+
+
+     <!---------------Resultados Vuelos de salida ------------------------------------>
+
+    <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+            <div class=" flighto" *ngIf="flighto">
+                <div class="ps-block--checkout-order" *ngFor="let item of arrayFlightOut">
+                    <div class="ps-block__content">
+                        <figure>
+                          <figcaption>
+                            <strong class="flight">Vuelos de ida<i class="fa fa-fighter-jet ico"></i></strong>
+                            <span [ngSwitch]="item.Flight.airline">       
+                            <img *ngSwitchCase="'LA'" src=" ../../../../assets/img/aerolinea/latam.png"  alt="">
+                            <img *ngSwitchCase="'G3'" src=" ../../../../assets/img/aerolinea/gol.png"  alt="">
+                            <img *ngSwitchCase="'AZUL'"src=" ../../../../assets/img/aerolinea/azul.png"  alt="">
+                            <img *ngSwitchCase="'AA'" src=" ../../../../assets/img/aerolinea/aa.png"  alt="">
+                            <img *ngSwitchCase="'CM'" src=" ../../../../assets/img/aerolinea/copa.png"  alt="">
+                            <img *ngSwitchCase="'DL'" src=" ../../../../assets/img/aerolinea/delta.png"  alt="">
+                            <img *ngSwitchCase="'AM'" src=" ../../../../assets/img/aerolinea/mexico.png"  alt="">
+                            </span>     
+                          </figcaption>
+                        </figure>
+                        <table class="table">
+                            <tr>
+                                <td class="air"><i class="fa fa-plane air"></i>  <br /> <strong class="company">{{item.Flight.airline}}</strong>    </td>  
+                                <td>  <span class="text-justify"> <span class="place"> {{item.Flight.from_airport_name}}</span> <br /> {{item.Flight.departure_date}} <br /> <span class="time">{{item.Flight.departure_time}}</span> </span> </td>
+                                <td>  <span class="text-justify"><span class="place">{{item.Flight.to_airport_name}}</span><br /> {{item.Flight.arrival_date}}<br /> <span class="time"> {{item.Flight.arrival_time}} </span></span>  </td>
+                                <td class="place">Vuelo <br />{{item.Flight.number}}   </td>
+                                <td class="place"> Cabina <i class="fa fa-suitcase"></i><br /> {{item.Flight.class}}  </td>
+                            </tr>
+                            <tr>
+                                <td> Milhas   </td>
+                                <td>Adulto: <br /><span class="oragen">{{item.BestAward.adult}}</span> </td>
+                                <td>Niños:  <br /><span class="oragen">{{item.BestAward.child}}</span>   </td>
+                                <td>Baby: <br /><span class="oragen">{{item.BestAward.baby}}</span>    </td>
+                                <td>Equipaje libre: <br /><span class="oragen">{{item.BestAward.free_luggage}}</span> </td>
+                            </tr>
+                            <tr>
+                                <td> <span class="real">R$</span> <br /><span class="oragen">{{item.BestAirlinePrice?.currency}}</span> </td>
+                                <td>Adulto: <br /><span class="oragen">{{item.BestAirlinePrice?.adult}}</span> </td>
+                                <td>Niños:  <br /><span class="oragen">{{item.BestAirlinePrice?.child}}</span>  </td>
+                                <td>Baby:  <br /><span class="oragen">{{item.BestAirlinePrice?.baby}} </span>
+                                </td>
+                                <td>Equipaje libre:  <br /><span class="oragen">{{item.BestAirlinePrice?.free_luggage}} </span>
+                                </td> 
+                             </tr>
+                       </table>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+ 
+ <!---------------------------Resultados trayecto 2 ---------------------->  
+ 
+ <div class="row row-mid">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 " >  
+        <div class="error text-left"  *ngIf="errorSecond"><i class="fa fa-exclamation-circle"></i><strong> No hay vuelos disponibles para éste trayecto.</strong></div>
+    </div>  
+    </div> 
+    <div class="row">
+        <div class="col-md-8">
+            <div class=" flighto" *ngIf="flightSecond">
+              <h5><strong class="datos">Trayecto 2</strong></h5> 
+                <div class="ps-block--checkout-order" *ngFor="let item of arrayTrip">
+                    <div class="ps-block__content">
+                        <figure>
+                          <figcaption>
+                              <strong class="flight">Vuelos disponibles para el trayecto<i class="fa fa-fighter-jet ico"></i></strong>
+                              <span [ngSwitch]="item.Flight.airline">       
+                              <img *ngSwitchCase="'LA'" src=" ../../../../assets/img/aerolinea/latam.png"  alt="">
+                              <img *ngSwitchCase="'G3'" src=" ../../../../assets/img/aerolinea/gol.png"  alt="">
+                              <img *ngSwitchCase="'AZUL'"src=" ../../../../assets/img/aerolinea/azul.png"  alt="">
+                              <img *ngSwitchCase="'AA'" src=" ../../../../assets/img/aerolinea/aa.png"  alt="">
+                              <img *ngSwitchCase="'CM'" src=" ../../../../assets/img/aerolinea/copa.png"  alt="">
+                              <img *ngSwitchCase="'DL'" src=" ../../../../assets/img/aerolinea/delta.png"  alt="">
+                              <img *ngSwitchCase="'AM'" src=" ../../../../assets/img/aerolinea/mexico.png"  alt="">
+                              </span>     
+                          </figcaption>
+                        </figure>
+                        <table class="table">
+                            <tr>
+                                <td class="air"><i class="fa fa-plane air"></i>  <br /> <strong class="company">{{item.Flight.airline}}</strong>    </td>  
+                                <td>  <span class="text-justify"> <span class="place"> {{item.Flight.from_airport_name}}</span> <br /> {{item.Flight.departure_date}} <br /> <span class="time">{{item.Flight.departure_time}}</span> </span> </td>
+                                <td>  <span class="text-justify"><span class="place">{{item.Flight.to_airport_name}}</span><br /> {{item.Flight.arrival_date}}<br /> <span class="time"> {{item.Flight.arrival_time}} </span></span>  </td>
+                                <td class="place">Vuelo <br />{{item.Flight.number}}   </td>
+                                <td class="place"> Cabina <i class="fa fa-suitcase"></i><br /> {{item.Flight.class}}  </td>
+                            </tr>
+                            <tr>
+                                <td> Milhas   </td>
+                                <td>Adulto: <br /><span class="oragen">{{item.BestAward.adult}}</span> </td>
+                                <td>Niños:  <br /><span class="oragen">{{item.BestAward.child}}</span>   </td>
+                                <td>Baby: <br /><span class="oragen">{{item.BestAward.baby}}</span>    </td>
+                                <td>Equipaje libre: <br /><span class="oragen">{{item.BestAward.free_luggage}}</span> </td>
+                            </tr>
+                            <tr>
+                                <td> <span class="real">R$</span> <br /><span class="oragen">{{item.BestAirlinePrice?.currency}}</span> </td>
+                                <td>Adulto: <br /><span class="oragen">{{item.BestAirlinePrice?.adult}}</span> </td>
+                                <td>Niños:  <br /><span class="oragen">{{item.BestAirlinePrice?.child}}</span>  </td>
+                                <td>Baby:  <br /><span class="oragen">{{item.BestAirlinePrice?.baby}} </span>
+                                </td>
+                                <td>Equipaje libre:  <br /><span class="oragen">{{item.BestAirlinePrice?.free_luggage}} </span>
+                                </td> 
+                             </tr>
+                       </table>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+   <!--------------------------- ---------------------->
+    
+  <div class="row row-mid">
+    <div class="col-md-8">  
+    <!---------------------------Resultados Vuelos de regreso ---------------------->   
+    <div class="flighti" *ngIf="flighti">  
+      <div class="ps-block--checkout-order" *ngFor="let item of arrayFlightIn">
+          <div class="ps-block__content">
+              <figure>
+                  <figcaption><strong class="flight">Vuelos de regreso<i class="fa fa-plane ico"></i></strong>
+                      <span [ngSwitch]="item.Flight.airline">       
+                          <img *ngSwitchCase="'LA'" src=" ../../../../assets/img/aerolinea/latam.png"  alt="">
+                          <img *ngSwitchCase="'G3'" src=" ../../../../assets/img/aerolinea/gol.png"  alt="">
+                          <img *ngSwitchCase="'AZUL'"src=" ../../../../assets/img/aerolinea/azul.png"  alt="">
+                          <img *ngSwitchCase="'AA'" src=" ../../../../assets/img/aerolinea/aa.png"  alt="">
+                          <img *ngSwitchCase="'CM'" src=" ../../../../assets/img/aerolinea/copa.png"  alt="">
+                          <img *ngSwitchCase="'DL'" src=" ../../../../assets/img/aerolinea/delta.png"  alt="">
+                          <img *ngSwitchCase="'AM'" src=" ../../../../assets/img/aerolinea/mexico.png"  alt="">
+                      </span>
+                  </figcaption>
+              </figure>
+              <table class="table">
+                  <tr>
+                    <td class="air"><i class="fa fa-plane air"></i>  <br /> <strong class="company">{{item.Flight.airline}}</strong>    </td>  
+                    <td>  <span class="text-justify"> <span class="place"> {{item.Flight.from_airport_name}}</span> <br /> {{item.Flight.departure_date}} <br /> <span class="time">{{item.Flight.departure_time}}</span> </span> </td>
+                    <td>  <span class="text-justify"><span class="place">{{item.Flight.to_airport_name}}</span><br /> {{item.Flight.arrival_date}}<br /> <span class="time"> {{item.Flight.arrival_time}} </span></span>  </td>
+                    <td class="place">Vuelo <br />{{item.Flight.number}}   </td>
+                    <td class="place"> Cabina <i class="fa fa-suitcase"></i><br /> {{item.Flight.class}}  </td>
+                  </tr>
+                  <tr>
+                    <td> Milhas   </td>
+                    <td>Adulto: <br /><span class="oragen">{{item.BestAward.adult}}</span> </td>
+                    <td>Niños:  <br /><span class="oragen">{{item.BestAward.child}}</span>   </td>
+                    <td>Baby: <br /><span class="oragen">{{item.BestAward.baby}}</span>    </td>
+                    <td>Equipaje libre: <br /><span class="oragen">{{item.BestAward.free_luggage}}</span> </td>
+                  </tr>
+                  <tr>  
+                    <td>  <span class="real">R$</span> <br /> <span class="oragen">{{item.BestAirlinePrice?.currency}}</span> </td>
+                    <td>Adulto: <br /><span class="oragen">{{item.BestAirlinePrice?.adult}}</span> </td>
+                    <td>Niños: <br /> <span class="oragen">{{item.BestAirlinePrice?.child}}</span>  </td>
+                    <td>Baby: <br /><span class="oragen">{{item.BestAirlinePrice?.baby}} </span>
+                    </td>
+                    <td>Equipaje libre: <br /><span class="oragen">{{item.BestAirlinePrice?.free_luggage}} </span>
+                    </td> 
+                  </tr>
+              </table>
+          </div>
+        </div>
+      </div> 
+    </div>     
+  </div>
+</div>
+</div>  
+</div>    

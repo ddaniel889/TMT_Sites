@@ -1,0 +1,21 @@
+<nacionales-header-sticky [obtenerDatos]="obtenerDatos" *ngIf="obtenerDatos !== null"></nacionales-header-sticky>
+
+<nacionales-breadcrumb [breadcrumb]="breadcrumb" *ngIf="breadcrumb !== null"></nacionales-breadcrumb>
+
+<div class="ps-page--product">
+
+  <div class="ps-container">
+
+    <nacionales-contenedor class="ps-page__container" [obtenerDatos]="obtenerDatos" *ngIf="obtenerDatos !== null">
+    </nacionales-contenedor>
+
+    <nacionales-similares-comprados [obtenerDatos]="obtenerDatos" *ngIf="obtenerDatos !== null">
+    </nacionales-similares-comprados>
+
+    <nacionales-relacionados [obtenerDatos]="obtenerDatos" *ngIf="obtenerDatos !== null"></nacionales-relacionados>
+
+  </div>
+
+</div>
+
+<shared-spinner-border class="my-5 mt-5" *ngIf="loading"></shared-spinner-border>

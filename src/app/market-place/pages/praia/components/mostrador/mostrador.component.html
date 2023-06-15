@@ -1,0 +1,38 @@
+<div class="ps-shopping ps-tab-root mb-5">
+
+  <div class="ps-shopping__header">
+
+    <h1><i class="fa fa-suitcase"></i> <span> Paquetes {{ titulo | titlecase }}</span> (<strong>{{ paquetes.length }}</strong>)</h1>
+
+    <!-- <praia-filtros></praia-filtros> -->
+
+  </div>
+
+  <div class="ps-tabs">
+
+    <div class="ps-tab active" id="tab-1">
+
+      <div class="ps-shopping-product">
+
+        <praia-mostrador-cuadricula 
+          [paquetes]="paquetes" 
+          [paginaActual]="paginaActual"
+          [itemsPorPagina]="itemsPorPagina"
+          [titulo]="titulo"
+          class="row"
+        ></praia-mostrador-cuadricula>
+
+      </div>
+
+      <div class="ps-pagination">
+
+        <praia-paginacion (pageChange)="cambiarPagina($event)" id="{{ titulo | lowercase }}"></praia-paginacion>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

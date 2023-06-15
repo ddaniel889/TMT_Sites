@@ -1,0 +1,29 @@
+<div class="ps-block--promotion-header bg--cover" imagen [bannerSuperior]="bannerSuperior">
+
+  <div class="container">
+
+    <div class="ps-block__left">
+
+      <h3>{{ bannerSuperior.H3tag }}</h3>
+
+      <figure>
+
+        <p>{{ bannerSuperior.P1tag }}</p>
+
+        <h4>{{ bannerSuperior.H4tag }}</h4>
+
+      </figure>
+
+    </div>
+
+    <div class="ps-block__center">
+
+      <p>{{ bannerSuperior.P2tag }}<span>{{ bannerSuperior.Spantag }}</span></p>
+
+    </div><a class="ps-btn ps-btn--sm"[routerLink]="['/tienda/producto', bannerSuperior.URLtag]">{{ bannerSuperior.Buttontag }}</a>
+    
+  </div>
+
+</div>
+
+<shared-spinner-border class="my-5 mt-5" *ngIf="loading"></shared-spinner-border>

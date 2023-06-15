@@ -1,0 +1,43 @@
+<header class="header header--product header--sticky" data-sticky="true">
+
+  <nav class="navigation">
+
+    <div class="container">
+
+      <article class="ps-product--header-sticky">
+
+        <div class="ps-product__thumbnail">
+
+          <img imagen [producto]="producto" tipo="paquete">
+
+        </div>
+
+        <div class="ps-product__wrapper">
+
+          <div class="ps-product__content">
+
+            <h3 class="ps-product__title">{{ producto.nombre }}</h3>
+
+          </div>
+
+          <div class="ps-product__shopping">
+            
+            <span class="ps-product__price">
+
+              <span oferta [producto]="producto"></span>
+
+            </span>
+
+            <a class="ps-btn" href="#"> Add to Cart</a>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </nav>
+
+</header>

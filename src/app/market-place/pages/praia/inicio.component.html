@@ -1,0 +1,25 @@
+<praia-banner [dataBanner]="dataBanner"></praia-banner>
+
+<praia-selector-paquetes></praia-selector-paquetes>
+
+<div class="container-fuid">
+
+  <div class="container">
+
+   
+
+    <div class="ps-layout--shop">
+
+      <section>
+
+        <praia-estado-mostrador [obtenerPaquetes]="obtenerPaquetes" *ngIf="obtenerPaquetes !== null && !loading"></praia-estado-mostrador>
+
+        <shared-spinner-border class="mt-5 mb-5" *ngIf="loading"></shared-spinner-border>
+
+      </section>
+
+    </div>
+
+  </div>
+
+</div>

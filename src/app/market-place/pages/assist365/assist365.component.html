@@ -1,0 +1,391 @@
+
+<div class="ps-site-features one">
+ <div class="container"> 
+
+    <div class="ps-section__content">
+
+        <!-- Formulario ver productos -->
+        <form class="ps-form--checkout assist"  [formGroup]="assits" (onSubmit)="verProductos()" *ngIf="cot">
+            <div class="ps-form__content">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                        <div class="ps-form__billing-info">
+                           
+                            <h3 class="ps-form__heading title2">Discover our insurance</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Regionn:</label>
+                                        <select class="form-control" formControlName="region_id"  [ngClass]="{ 'valid-input': region_id.valid, 'invalid-input': region_id.invalid }">
+                                            <option  value="16" selected>Estados Unidos e Canada </option>
+                                            <option  value="9">Asia</option>
+                                            <option  value="10">Europa</option>
+                                            <option  value="17">Demais paises</option>
+                                            <option  value="5">Sudamerica y Caribe</option>
+                                            <option  value="2">Oceanía</option>
+                                            <option  value="9">Africa</option>
+                                        </select>
+                                        <div class="invalid-label" *ngIf="region_id.hasError('required')">Este campo é obrigatorio.</div>
+                                
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Country:</label>
+                                        <select class="form-control" formControlName="country_id"  [ngClass]="{ 'valid-input': country_id.valid, 'invalid-input': country_id.invalid }">
+                                            <option *ngFor="let item of countryList"  [ngValue]="item.id">{{item.name}}</option> 
+                                        </select>
+                                        <div class="invalid-label" *ngIf="country_id.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Days for calculate:</label>
+                                        <input class="form-control" type="number" min="0" placeholder="" formControlName="days" [ngClass]="{ 'is-valid': days.valid, 'is-invalid': days.invalid }">
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="days.hasError('required')">Este campo é obrigatorio.</div>
+                                    <div class="invalid-feedback" *ngIf="days.hasError('minlength')">Você deve indicar pelo menos 1 dia.</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Years:</label>
+                                        <input class="form-control" type="number" min="0" placeholder="" formControlName="to_year" [ngClass]="{ 'is-valid': to_year.valid, 'is-invalid': to_year.invalid }">
+                                    </div>
+                                    <div class="invalid-feedback" *ngIf="to_year.hasError('required')">Este campo é obrigatorio.</div>
+                                    <div class="invalid-feedback" *ngIf="to_year.hasError('minlength')">O campo deve ter 4 números.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Criteria:</label>
+                                        <select class="form-control" formControlName="provider" [ngClass]="{ 'valid-input': provider.valid, 'invalid-input': provider.invalid }">
+                                            <option  value="2" selected>Covid </option>
+                                            <option  value="1">No covid</option>
+                                        </select>
+                                        <div class="invalid-label" *ngIf="provider.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Total of passenger:</label>
+                                        <input class="form-control" type="number" min="1" placeholder="" formControlName="insured">
+                                        <div class="invalid-feedback" *ngIf="insured.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Age of passenger:</label>
+                                        <input class="form-control" type="number" min="0" placeholder=""  formControlName="age" [ngClass]="{ 'is-valid': age.valid, 'is-invalid': age.invalid }">
+                                        <div class="invalid-feedback" *ngIf="age.hasError('required')">Este campo é obrigatorio.</div>
+                                        <div class="invalid-feedback" *ngIf="age.hasError('minlength')">O campo deve ter 4 números.</div>
+                                    </div>
+                                </div>  
+                                <div class="col-sm-6">
+                                    <div class="">
+                                        <label class="edad">Add</label> <br />
+                                        <button class="ps-btn ps-btn btn-bottom btn-add" type="submit" (click)="crearEdad()"  >Add</button>
+                                    </div>
+                                  
+                                </div> 
+                            </div>
+                                  
+                            <div class="row" *ngFor="let control of agePax.controls; index as i">
+                                <div class="col-sm-6 age-column">  
+                                    <i class="fa fa-close ico-age" (click)="quitarEdad(i)"></i> 
+                                    <input class="form-control form-bottom" [formControl]="agePax.controls[i]" /> 
+                               </div>
+                            </div>
+                            <button class="ps-btn ps-btn--fullwidth btn-first" type="submit" (click)="verProductos()"  [disabled]="!loading && assits.invalid">{{ loading ? 'Enviando' : 'Consultar' }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+      
+       <!-- Formulario de proceso emitir poliza -->
+        <form class="ps-form--checkout checkout-border" [formGroup]="emitForm" *ngIf="emit">
+            <div class="ps-form__content">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                        <div class="ps-form__billing-info">
+                            <h3 class="ps-form__heading title2">Emite insurance for your trip</h3>
+                            <h4><strong class="datos">Passenger data</strong></h4> 
+                            <p><strong class="title">{{nombrePlan}}</strong> </p>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Region:</label>
+                                        <select class="form-control" formControlName="regionId"  [ngClass]="{ 'valid-input': regionId.valid, 'invalid-input': regionId.invalid }">
+                                            <option  value="16" selected>Estados Unidos e Canada </option>
+                                            <option  value="9">Asia</option>
+                                            <option  value="10">Europa</option>
+                                            <option  value="17">Demais paises</option>
+                                            <option  value="5">Sudamerica y Caribe</option>
+                                            <option  value="2">Oceanía</option>
+                                            <option  value="9">Africa</option>
+                                        </select>
+                                        <div class="invalid-label" *ngIf="regionId.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Country:</label>
+                                        <select class="form-control" formControlName="countryId"  [ngClass]="{ 'valid-input': countryId.valid, 'invalid-input': countryId.invalid }">
+                                            <option *ngFor="let item of countryList"  [ngValue]="item.id">{{item.name}}</option> 
+                                        </select>
+                                        <div class="invalid-label" *ngIf="countryId.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                             </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Departure date:</label>
+                                        <input class="form-control" type="date"  placeholder=""  formControlName="fechaS"  [ngClass]="{ 'is-valid': fechaS.valid, 'is-invalid': fechaS.invalid }">
+                                        <div class="invalid-feedback" *ngIf="fechaS.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Arrival date:</label>
+                                        <input class="form-control" type="date" formControlName="fechaL" placeholder="" [ngClass]="{ 'is-valid': fechaL.valid, 'is-invalid': fechaL.invalid }">
+                                        <div class="invalid-feedback" *ngIf="fechaL.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Name of beneficiary:</label>
+                                            <input class="form-control" type="text" formControlName="nombreB" placeholder="" [ngClass]="{ 'is-valid': nombreB.valid, 'is-invalid': nombreB.invalid }">
+                                            <div class="invalid-feedback" *ngIf="nombreB.hasError('required')">Este campo é obrigatorio.</div>
+                                            <small class="form-text text-muted invalid-label" *ngIf="nombreB.hasError('pattern')">
+                                                Solo se permite caracteres alfabeticos en los nombres.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Lastname of beneficiary:</label>
+                                        <input class="form-control" type="text" formControlName="apellidoB" placeholder="" [ngClass]="{ 'is-valid': apellidoB.valid, 'is-invalid': apellidoB.invalid }">
+                                        <div class="invalid-feedback" *ngIf="apellidoB.hasError('required')">Este campo é obrigatorio.</div>
+                                        <small class="form-text text-muted invalid-label" *ngIf="apellidoB.hasError('pattern')">
+                                            Solo se permite caracteres alfabeticos en los apellidos.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Birth beneficiary:</label>
+                                        <input class="form-control" type="number" min="0" formControlName="diaNacB" placeholder="" [ngClass]="{ 'is-valid': diaNacB.valid, 'is-invalid': diaNacB.invalid }">
+                                        <div class="invalid-feedback" *ngIf="diaNacB.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Month of beneficiary:</label>
+                                            <input class="form-control" type="number" min="0" formControlName="mesNacB" placeholder="" [ngClass]="{ 'is-valid': mesNacB.valid, 'is-invalid': mesNacB.invalid }">
+                                            <div class="invalid-feedback" *ngIf="mesNacB.hasError('required')">Este campo é obrigatorio.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Año de nacimiento del beneficiario:</label>
+                                        <input class="form-control" type="number" formControlName="aNacB" min="0" placeholder="" [ngClass]="{ 'is-valid': aNacB.valid, 'is-invalid': aNacB.invalid }">
+                                        <div class="invalid-feedback" *ngIf="aNacB.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Tipo de documento:</label>
+                                    <select class="form-control" formControlName="tipoDoc"  [ngClass]="{ 'valid-input': tipoDoc.valid, 'invalid-input': tipoDoc.invalid }">
+                                        <option  value="1" selected>DNI </option>
+                                        <option  value="5">PASSPORT</option>   
+                                    </select>
+                                    <div class="invalid-label" *ngIf="tipoDoc.hasError('required')">Este campo é obrigatorio.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Número de identificación:</label>
+                                        <input class="form-control" type="text" formControlName="numDoc"  placeholder=""  [ngClass]="{ 'is-valid': numDoc.valid, 'is-invalid': numDoc.invalid }">
+                                        <div class="invalid-feedback" *ngIf="numDoc.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Nacionalidad:</label>
+                                        <select class="form-control" formControlName="countryB" [ngClass]="{ 'valid-input': countryB.valid, 'invalid-input': countryB.invalid }">
+                                          <option *ngFor="let item of countryList"  [ngValue]="item.id">{{item.name}}</option> 
+                                        </select>
+                                        <div class="invalid-label" *ngIf="countryB.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>País de residencia:</label>
+                                        <select class="form-control" formControlName="residenciaB"  [ngClass]="{ 'valid-input': residenciaB.valid, 'invalid-input': residenciaB.invalid }">
+                                          <option *ngFor="let item of countryList"  [ngValue]="item.id">{{item.name}}</option> 
+                                        </select>
+                                        <div class="invalid-label" *ngIf="residenciaB.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                       <label>Teléfono principal:</label>
+                                         <input class="form-control" type="number" formControlName="phoneB" min="0" placeholder="" [ngClass]="{ 'is-valid': phoneB.valid, 'is-invalid': phoneB.invalid }">
+                                       <div class="invalid-feedback" *ngIf="phoneB.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                   <label>Email</label>
+                                     <input class="form-control" type="text" formControlName="emailB" placeholder="" [ngClass]="{ 'is-valid': emailB.valid, 'is-invalid': emailB.invalid }">
+                                     <div class="invalid-feedback" *ngIf="emailB.hasError('required')">Este campo é obrigatorio.</div>
+                                    <small class="form-text text-muted invalid-label" *ngIf="emailB.hasError('email')">
+									    Introduza um endereço de E-mail válido.
+								    </small>
+                            </div>
+                            <div class="form-group">
+                                  <label>Nombre de contacto de emergencia</label>
+                                    <input class="form-control" type="text" formControlName="nomContactE"  placeholder="" [ngClass]="{ 'is-valid': nomContactE.valid, 'is-invalid': nomContactE.invalid }">
+                                   <div class="invalid-feedback" *ngIf="nomContactE.hasError('required')">Este campo é obrigatorio.</div>
+                                   <small class="form-text text-muted invalid-label" *ngIf="nomContactE.hasError('pattern')">
+                                    Solo se permite caracteres alfabeticos en el nombre de contacto.
+                                  </small>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Teléfono de contacto de emergencia</label>
+                                        <input class="form-control" type="number" formControlName="phoneContactE" placeholder="" [ngClass]="{ 'is-valid': phoneContactE.valid, 'is-invalid': phoneContactE.invalid }">
+                                        <div class="invalid-feedback" *ngIf="phoneContactE.hasError('required')">Este campo é obrigatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="ps-btn ps-btn--fullwidth" type="submit" (click)="emitirPoliza()">Emitir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+      <!---- Ver planilla -->
+
+      <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 detalle">  
+        <div class="ps-form__total"  *ngIf="vaucher">
+            <h3 class="ps-form__heading title">{{ nombrePlan }}</h3> 
+            <div class="content">
+                <div class="ps-block--checkout-total">
+                    <div class="ps-block__header">
+                        <p><strong>Detalle de póliza</strong></p> 
+                        <p>Cobertura</p>
+                    </div>
+                    <div class="ps-block__content">
+                        <table class="table ps-block__products">
+                            <tbody>
+                                <tr>
+                                    <td><i class="fa fa-fighter-jet title"></i><a class="margin_a" href="#"> Destino:</a>
+                                    </td>
+                                    <td class="results"><strong>{{region | regionSelected}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-calendar-o title"></i><a  class="margin_a" href="#">Fecha de inicio:</a>
+                                        <p class="margin_b">Fecha de fin:</p>
+                                    </td>
+                                    <td class="results"><strong>{{ dateFrom }}</strong>
+                                        <p><strong>{{ dateTo }}</strong></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-user title"></i><a class="margin_a" href="#"> Personas:</a>
+                                        <p class="margin_b">Edades:</p>
+                                    </td>
+                                    <td class="results"><strong>1</strong>
+                                        <p><strong>{{ edadPax }}</strong></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                        <h3>Total <span>${{ precio}}</span></h3>
+                    </div>
+                </div>
+                <a class="ps-btn ps-btn--fullwidth" type="submit" (click)="emitirVaucher()">Generar Póliza</a>
+                <a *ngIf="documento" class="ps-btn ps-btn--fullwidth btn" type="submit" href="{{poliza}}" target="_blank">Descargar Documento</a>
+            </div>
+        </div>
+     </div>
+    </div>
+      <!------------------->
+  
+</div>  
+
+    <!---- Ver productos -->
+
+    <div class="prod" *ngIf="productos" > 
+        <h3 class="ps-form__heading title2 coberturas">Coberturas disponibles</h3>
+      
+        <div class="heroes-menu">
+        <div class="card ps-product__info prod-display margin-prod"  *ngFor="let item of productList">
+            <h2 class="title desc_marg"> {{ item.product.name }}</h2>
+          
+            <h4 class="ps-product__price desc_marg">USD {{ item.product.insured_amount}}</h4>
+            <div class="ps-product__meta">
+                <p>{{ item.product.description}}</p>
+            </div>
+            <div class="ps-product__desc desc_marg">
+                <p>Precio total:<a href=""><strong>{{ item.product.total_price }}</strong></a></p>
+                <p>Proveedor:<a href=""><strong> {{ item.product.provider }}</strong></a></p>
+                <p>Precio básico:<a href=""><strong> {{ item.product.basic_price }}</strong></a></p>
+                <p>Promo:<a href=""><strong> {{ item.product.promo }}</strong></a></p>
+                <p>Precio total usd:<a href=""><strong> {{ item.product.total_price_usd }}</strong></a></p>
+                <p>Moneda:<a href=""><strong> {{ item.product.currency_symbol }}</strong></a></p>
+                <p>Clase:<a href=""><strong> {{ item.product.class_name }}</strong></a></p>
+                <p>{{ item.product.quote_link}}</p>
+                <ul class="ps-list--dot">
+                    <li> {{ item.benefit[0].name }}<span class="spa-margin"><strong>{{ item.benefit[0].price }}</strong></span></li> 
+                    <li> {{ item.benefit[1].name }}<span class="spa-margin"><strong>{{ item.benefit[1].price }}</strong></span></li>
+                    <li> {{ item.benefit[2].name }}<span class="spa-margin"><strong>{{ item.benefit[2].price }}</strong></span></li>
+                    <li> {{ item.benefit[3]?.name }}<span class="spa-margin"><strong>{{ item.benefit[3]?.price }}</strong></span></li>
+                </ul>
+            </div>
+            <hr>
+            <div class="ps-product__groupped">
+                <div class="table-responsive">
+                    <table class="table ps-table--product-groupped">
+                        <tbody>
+                            <tr>
+                                <td><a class="ps-btn" (click)="selectPlan(item.product.id,item.product.name,item.product.total_price_usd)">Seleccionar</a></td>                                   
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <h5 class="ps-form__heading title2 coberturas no-policy" *ngIf="policy"><i class="fa fa-exclamation-circle ico"></i>No hay planes disponibles para el destino seleccionado. <a class="ps" (click)="volver()">Cotizar nuevamente</a></h5>
+    
+    </div>
+
+</div>

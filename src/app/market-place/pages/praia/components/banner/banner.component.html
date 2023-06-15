@@ -1,0 +1,40 @@
+<div class="ps-home-banner" *ngIf="!loading && slideHorizontales !== null">
+
+  <div class="ps-carousel--nav-inside owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
+    data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1"
+    data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on"
+    data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
+
+    <div class="ps-banner--market-1" *ngFor="let slideHorizontal of slideHorizontales; let lastIndex = last" imagen
+      [slideHorizontal]="slideHorizontal" [slideHorizontalDataBackground]="true">
+
+      <img imagen [slideHorizontal]="slideHorizontal">
+
+      <div class="ps-banner__content">
+
+        <h5>{{ slideHorizontal.H4tag }}</h5>
+
+        <h3>
+
+          {{ slideHorizontal.H3_1tag }} <br />
+
+          {{ slideHorizontal.H3_2tag }} <br />
+
+        </h3>
+
+        <p>{{ slideHorizontal.H3_3tag }} <strong> {{ slideHorizontal.H3_4tag }}</strong></p>
+
+        <a class="ps-btn"
+          [routerLink]="['/tienda/producto', slideHorizontal.URLtag]">{{ slideHorizontal.Buttontag }}</a>
+
+      </div>
+
+      {{ lastIndex ? plugins() : '' }}
+
+    </div>
+
+  </div>
+
+</div>
+
+<shared-spinner-border class="my-5 mt-5" *ngIf="loading"></shared-spinner-border>

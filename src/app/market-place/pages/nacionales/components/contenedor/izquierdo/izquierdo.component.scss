@@ -1,0 +1,25 @@
+.ps-product--detail {
+  .ps-product__header {
+    .ps-product__info {
+      .ps-product__countdown {
+        padding: 20px 0 0 0;
+        background-color: transparent
+      }
+      .ps-product__sharing {
+        .instagram {
+          color: #fff;
+          background: #d6249f;
+          background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+        }
+      }
+    }
+  }
+}
+
+.ps-product__shopping {
+  .form-group--number {
+    .form-control {
+      padding: 0 5rem;
+    }
+  }
+}

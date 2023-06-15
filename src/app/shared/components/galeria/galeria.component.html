@@ -1,0 +1,45 @@
+<figure>
+
+  <div class="ps-wrapper">
+
+    <div class="ps-product__gallery" data-arrow="false">
+
+      <div class="item" *ngFor="let galeria of producto.galeria">
+
+        <a imagen [galeria]="galeria" [galeriaHref]="true">
+
+          <img imagen [galeria]="galeria">
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</figure>
+
+<div class="ps-product__variants" data-item="4" data-md="4" data-sm="4" data-arrow="false">
+
+  <div class="item" *ngFor="let galeria of producto.galeria">
+
+    <img imagen [galeria]="galeria">
+
+  </div>
+
+  <div class="item" *ngIf="producto.video !== undefined">
+
+    <div class="ps-video">
+
+      <a href="https://www.youtube.com/watch?v={{ producto.video.idVideo }}" *ngIf="producto.video.plataforma === 'youtube'">
+
+        <img imagen [producto]="producto" tipo="galeria">
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

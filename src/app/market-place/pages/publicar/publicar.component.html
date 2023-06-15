@@ -1,0 +1,33 @@
+<div class="ps-page--404">
+    <div class="container bg">
+  
+  <div class="container"> 
+  
+    <div class="row">  
+      <div class="col-md-6">  
+       <h3 class="pub">Post News</h3>
+      <form  [formGroup]="newsForm"> 
+        <fieldset class="fWidth"> 
+        <h5 class="txt">Title</h5> 
+        <input type="text" size="40"  formControlName="titulo"  class="form-control"><br />
+        <h5 class="txt">Image</h5>
+        <input #inputFoto hidden="true" type="file" name="imagen"  formControlName="file" id="file"   multiple onclick="this.value=null" (change)="onFile($event)" />
+        <button mat-flat-button class="btnFile" type="button" (click)="inputFoto.click()" class="btnFile"><span class="txtFile">Select</span></button> 
+        <br />
+        <h5 class="txt">Writing the text</h5>
+        <textarea formControlName="descripcion" cols="50" rows="6"  class="form-control">
+        </textarea><hr>
+  
+   
+        <a routerLink="/noticias" class="btn btn-warning btn-lg active lft" role="button" aria-pressed="true">Cancel</a> 
+     
+        <a  (click)="guardar()" class="btn btn-success btn-lg active rgt" role="button" aria-pressed="true">Post</a>
+      </fieldset>
+      </form> 
+    </div> 
+    </div>
+      </div> 
+  
+    </div> 
+    
+  </div> 
